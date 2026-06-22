@@ -8,12 +8,20 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Student Dashboard</title>
-</head>
-<body>
+    <head>
+        <title>Student Dashboard</title>
+    </head>
+    <body>
 
-<h1>Welcome Student, Azrul</h1>
+        <h1>Welcome Student</h1>
 
-</body>
+        <a href="bookFacility.jsp">Book Facility</a>
+        <br><br>
+
+        <a href="myBooking.jsp">My Booking</a>
+        <br><br>
+
+        <a href="LogoutServlet">Logout</a>
+
+    </body>
 </html>

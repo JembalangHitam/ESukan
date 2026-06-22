@@ -16,6 +16,15 @@
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+    <servlet-name>FacilityServlet</servlet-name>
+    <servlet-class>com.esukan.controller.FacilityServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>FacilityServlet</servlet-name>
+    <url-pattern>/FacilityServlet</url-pattern>
+</servlet-mapping>
     <session-config>
         <session-timeout>
             30
