@@ -17,14 +17,32 @@
         <url-pattern>/LoginServlet</url-pattern>
     </servlet-mapping>
     <servlet>
-    <servlet-name>FacilityServlet</servlet-name>
-    <servlet-class>com.esukan.controller.FacilityServlet</servlet-class>
-</servlet>
+        <servlet-name>FacilityServlet</servlet-name>
+        <servlet-class>com.esukan.controller.FacilityServlet</servlet-class>
+    </servlet>
 
-<servlet-mapping>
-    <servlet-name>FacilityServlet</servlet-name>
-    <url-pattern>/FacilityServlet</url-pattern>
-</servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FacilityServlet</servlet-name>
+        <url-pattern>/FacilityServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>EquipmentServlet</servlet-name>
+        <servlet-class>com.esukan.controller.EquipmentServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>EquipmentServlet</servlet-name>
+        <url-pattern>/EquipmentServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>BookingServlet</servlet-name>
+        <servlet-class>com.esukan.controller.BookingServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>BookingServlet</servlet-name>
+        <url-pattern>/BookingServlet</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

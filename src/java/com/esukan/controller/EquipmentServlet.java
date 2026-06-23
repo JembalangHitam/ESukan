@@ -5,65 +5,53 @@
  */
 package com.esukan.controller;
 
-import com.esukan.dao.FacilityDAO;
-import com.esukan.model.Facility;
+import com.esukan.dao.EquipmentDAO;
+import com.esukan.model.Equipment;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.ServletException;
-import java.util.List;
-import javax.servlet.RequestDispatcher;
 
 /**
  *
  * @author 20248
  */
-public class FacilityServlet extends HttpServlet {
+public class EquipmentServlet extends HttpServlet {
 
     @Override
+
     protected void doPost(HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
 
-        String idStr = request.getParameter("facilityId");
+        String idStr = request.getParameter("equipmentId");
 
-        String facilityName = request.getParameter("facilityName");
-        String location = request.getParameter("location");
+        String equipmentName = request.getParameter("equipmentName");
+        int quantity = Integer.parseInt(request.getParameter("quantity"));
         String status = request.getParameter("status");
 
-        Facility facility = new Facility();
+        Equipment equipment = new Equipment();
 
-        facility.setFacilityName(facilityName);
-        facility.setLocation(location);
-        facility.setStatus(status);
+        equipment.setEquipmentName(equipmentName);
+        equipment.setQuantity(quantity);
+        equipment.setStatus(status);
 
-        FacilityDAO facilityDAO = new FacilityDAO();
+        EquipmentDAO equipmentDAO = new EquipmentDAO();
 
         boolean result;
 
         if (idStr == null || idStr.isEmpty()) {
-
-            result = facilityDAO.addFacility(facility);
-
+            result = equipmentDAO.addEquipment(equipment);
         } else {
-
-            int facilityId = Integer.parseInt(idStr);
-
-            facility.setFacilityId(facilityId);
-
-            result = facilityDAO.updateFacility(facility);
+            int equipmentId = Integer.parseInt(idStr);
+            equipment.setEquipmentId(equipmentId);
+            result = equipmentDAO.updateEquipment(equipment);
         }
-
         if (result) {
-
-            response.sendRedirect("manageFacility.jsp");
-
+            response.sendRedirect("manageEquipment.jsp");
         } else {
-
             response.getWriter().println("Operation Failed!");
-
         }
     }
 
@@ -76,13 +64,13 @@ public class FacilityServlet extends HttpServlet {
 
         if (deleteId != null) {
 
-            int facilityId = Integer.parseInt(deleteId);
+            int equipmentId = Integer.parseInt(deleteId);
 
-            FacilityDAO facilityDAO = new FacilityDAO();
+            EquipmentDAO equipmentDAO = new EquipmentDAO();
 
-            facilityDAO.deleteFacility(facilityId);
+            equipmentDAO.deleteEquipment(equipmentId);
         }
 
-        response.sendRedirect("manageFacility.jsp");
+        response.sendRedirect("manageEquipment.jsp");
     }
 }

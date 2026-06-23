@@ -5,7 +5,7 @@
  */
 package com.esukan.dao;
 
-import com.esukan.model.Facility;
+import com.esukan.model.Equipment;
 import com.esukan.util.DBConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,17 +17,17 @@ import java.util.List;
  *
  * @author 20248
  */
-public class FacilityDAO {
+public class EquipmentDAO {
 
-    public boolean addFacility(Facility facility) {
+    public boolean addEquipment(Equipment equipment) {
         boolean rowInserted = false;
         try {
             Connection conn = DBConnection.getConnection();
-            String sql = "INSERT INTO FACILITIES(FACILITY_NAME, LOCATION, STATUS) VALUES (?, ?, ?)";
+            String sql = "INSERT INTO EQUIPMENTS(EQUIPMENT_NAME, QUANTITY, STATUS) VALUES (?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, facility.getFacilityName());
-            ps.setString(2, facility.getLocation());
-            ps.setString(3, facility.getStatus());
+            ps.setString(1, equipment.getEquipmentName());
+            ps.setInt(2, equipment.getQuantity());
+            ps.setString(3, equipment.getStatus());
             rowInserted = ps.executeUpdate() > 0;
             conn.close();
         } catch (Exception e) {
@@ -36,64 +36,52 @@ public class FacilityDAO {
         return rowInserted;
     }
 
-    public List<Facility> getAllFacilities() {
-        List<Facility> facilityList = new ArrayList<Facility>();
-
+    public List<Equipment> getAllEquipments() {
+        List<Equipment> equipmentList = new ArrayList<Equipment>();
         try {
-
             Connection conn = DBConnection.getConnection();
-
-            String sql = "SELECT * FROM FACILITIES";
-
+            String sql = "SELECT * FROM EQUIPMENTS";
             PreparedStatement ps = conn.prepareStatement(sql);
-
             ResultSet rs = ps.executeQuery();
-
             while (rs.next()) {
-
-                Facility facility = new Facility();
-
-                facility.setFacilityId(rs.getInt("FACILITY_ID"));
-                facility.setFacilityName(rs.getString("FACILITY_NAME"));
-                facility.setLocation(rs.getString("LOCATION"));
-                facility.setStatus(rs.getString("STATUS"));
-
-                facilityList.add(facility);
+                Equipment equipment = new Equipment();
+                equipment.setEquipmentId(rs.getInt("EQUIPMENT_ID"));
+                equipment.setEquipmentName(rs.getString("EQUIPMENT_NAME"));
+                equipment.setQuantity(rs.getInt("QUANTITY"));
+                equipment.setStatus(rs.getString("STATUS"));
+                equipmentList.add(equipment);
             }
-
             conn.close();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        return facilityList;
+        return equipmentList;
     }
 
-    public Facility getFacilityById(int facilityId) {
+    public Equipment getEquipmentById(int equipmentId) {
 
-        Facility facility = null;
+        Equipment equipment = null;
 
         try {
 
             Connection conn = DBConnection.getConnection();
 
-            String sql = "SELECT * FROM FACILITIES WHERE FACILITY_ID=?";
+            String sql = "SELECT * FROM EQUIPMENTS WHERE EQUIPMENT_ID=?";
 
             PreparedStatement ps = conn.prepareStatement(sql);
 
-            ps.setInt(1, facilityId);
+            ps.setInt(1, equipmentId);
 
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
 
-                facility = new Facility();
+                equipment = new Equipment();
 
-                facility.setFacilityId(rs.getInt("FACILITY_ID"));
-                facility.setFacilityName(rs.getString("FACILITY_NAME"));
-                facility.setLocation(rs.getString("LOCATION"));
-                facility.setStatus(rs.getString("STATUS"));
+                equipment.setEquipmentId(rs.getInt("EQUIPMENT_ID"));
+                equipment.setEquipmentName(rs.getString("EQUIPMENT_NAME"));
+                equipment.setQuantity(rs.getInt("QUANTITY"));
+                equipment.setStatus(rs.getString("STATUS"));
 
             }
 
@@ -103,10 +91,10 @@ public class FacilityDAO {
             e.printStackTrace();
         }
 
-        return facility;
+        return equipment;
     }
 
-    public boolean updateFacility(Facility facility) {
+    public boolean updateEquipment(Equipment equipment) {
 
         boolean rowUpdated = false;
 
@@ -115,14 +103,14 @@ public class FacilityDAO {
             Connection conn = DBConnection.getConnection();
 
             String sql
-                    = "UPDATE FACILITIES SET FACILITY_NAME=?, LOCATION=?, STATUS=? WHERE FACILITY_ID=?";
+                    = "UPDATE EQUIPMENTS SET EQUIPMENT_NAME=?, QUANTITY=?, STATUS=? WHERE EQUIPMENT_ID=?";
 
             PreparedStatement ps = conn.prepareStatement(sql);
 
-            ps.setString(1, facility.getFacilityName());
-            ps.setString(2, facility.getLocation());
-            ps.setString(3, facility.getStatus());
-            ps.setInt(4, facility.getFacilityId());
+            ps.setString(1, equipment.getEquipmentName());
+            ps.setInt(2, equipment.getQuantity());
+            ps.setString(3, equipment.getStatus());
+            ps.setInt(4, equipment.getEquipmentId());
 
             rowUpdated = ps.executeUpdate() > 0;
 
@@ -135,7 +123,7 @@ public class FacilityDAO {
         return rowUpdated;
     }
 
-public boolean deleteFacility(int facilityId) {
+    public boolean deleteEquipment(int equipmentId) {
 
         boolean rowDeleted = false;
 
@@ -143,11 +131,11 @@ public boolean deleteFacility(int facilityId) {
 
             Connection conn = DBConnection.getConnection();
 
-            String sql = "DELETE FROM FACILITIES WHERE FACILITY_ID=?";
+            String sql = "DELETE FROM EQUIPMENTS WHERE EQUIPMENT_ID=?";
 
             PreparedStatement ps = conn.prepareStatement(sql);
 
-            ps.setInt(1, facilityId);
+            ps.setInt(1, equipmentId);
 
             rowDeleted = ps.executeUpdate() > 0;
 
@@ -156,7 +144,6 @@ public boolean deleteFacility(int facilityId) {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return rowDeleted;
     }
 }

@@ -15,10 +15,10 @@
 
         <h1>Welcome Student</h1>
 
-        <a href="bookFacility.jsp">Book Facility</a>
+        <a href="manageBooking.jsp">Book Facility</a>
         <br><br>
 
-        <a href="myBooking.jsp">My Booking</a>
+        <a href="manageBooking.jsp">My Booking</a>
         <br><br>
 
         <a href="LogoutServlet">Logout</a>
