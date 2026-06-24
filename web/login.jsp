@@ -3,31 +3,54 @@
     Created on : Jun 19, 2026, 4:04:05 AM
     Author     : 20248
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Login</title>
+
+    <title>E-Sukan Login</title>
+
+    <link rel="stylesheet" href="style.css">
+
 </head>
+
 <body>
 
-<h1>User Login</h1>
+    <div class="container">
 
-<form action="LoginServlet" method="post">
+        <h1>E-Sukan Login</h1>
 
-    Email:<br>
-    <input type="email" name="email">
-    <br><br>
+        <form action="LoginServlet" method="post">
 
-    Password:<br>
-    <input type="password" name="password">
-    <br><br>
+            Email
 
-    <input type="submit" value="Login">
+            <input type="email"
+                   name="email"
+                   required>
 
-</form>
+            Password
+
+            <input type="password"
+                   name="password"
+                   required>
+
+            <input type="submit"
+                   value="Login">
+
+        </form>
+
+        <div class="register">
+
+            <a href="register.jsp">
+                Register New Account
+            </a>
+
+        </div>
+
+    </div>
 
 </body>
+
 </html>

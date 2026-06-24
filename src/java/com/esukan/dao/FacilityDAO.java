@@ -135,7 +135,7 @@ public class FacilityDAO {
         return rowUpdated;
     }
 
-public boolean deleteFacility(int facilityId) {
+    public boolean deleteFacility(int facilityId) {
 
         boolean rowDeleted = false;
 
@@ -158,5 +158,100 @@ public boolean deleteFacility(int facilityId) {
         }
 
         return rowDeleted;
+    }
+
+    public int getFacilityCount() {
+
+        int count = 0;
+
+        try {
+
+            Connection conn = DBConnection.getConnection();
+
+            String sql = "SELECT COUNT(*) FROM FACILITIES";
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+
+                count = rs.getInt(1);
+
+            }
+
+            conn.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return count;
+    }
+
+    public List<Facility> getAvailableFacilities() {
+
+        List<Facility> facilityList = new ArrayList<Facility>();
+
+        try {
+
+            Connection conn = DBConnection.getConnection();
+
+            String sql
+                    = "SELECT * FROM FACILITIES WHERE STATUS='Available'";
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                Facility facility = new Facility();
+
+                facility.setFacilityId(rs.getInt("FACILITY_ID"));
+                facility.setFacilityName(rs.getString("FACILITY_NAME"));
+                facility.setLocation(rs.getString("LOCATION"));
+                facility.setStatus(rs.getString("STATUS"));
+
+                facilityList.add(facility);
+            }
+
+            conn.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return facilityList;
+    }
+
+    public String getFacilityNameById(int facilityId) {
+
+        String facilityName = "";
+
+        try {
+
+            Connection conn = DBConnection.getConnection();
+
+            String sql
+                    = "SELECT FACILITY_NAME FROM FACILITIES WHERE FACILITY_ID=?";
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setInt(1, facilityId);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                facilityName = rs.getString("FACILITY_NAME");
+            }
+
+            conn.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return facilityName;
     }
 }

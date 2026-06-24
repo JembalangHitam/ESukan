@@ -146,4 +146,126 @@ public class EquipmentDAO {
         }
         return rowDeleted;
     }
+
+    public int getEquipmentCount() {
+
+        int count = 0;
+
+        try {
+
+            Connection conn = DBConnection.getConnection();
+
+            String sql = "SELECT COUNT(*) FROM EQUIPMENTS";
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+
+                count = rs.getInt(1);
+
+            }
+
+            conn.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return count;
+    }
+
+    public String getEquipmentNameById(int equipmentId) {
+
+        String equipmentName = "";
+
+        try {
+
+            Connection conn = DBConnection.getConnection();
+
+            String sql
+                    = "SELECT EQUIPMENT_NAME FROM EQUIPMENTS WHERE EQUIPMENT_ID=?";
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setInt(1, equipmentId);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+
+                equipmentName = rs.getString("EQUIPMENT_NAME");
+
+            }
+
+            conn.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return equipmentName;
+    }
+
+    public int getEquipmentQuantity(int equipmentId) {
+
+        int quantity = 0;
+
+        try {
+
+            Connection conn = DBConnection.getConnection();
+
+            String sql
+                    = "SELECT QUANTITY FROM EQUIPMENTS WHERE EQUIPMENT_ID=?";
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setInt(1, equipmentId);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+
+                quantity = rs.getInt("QUANTITY");
+
+            }
+
+            conn.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return quantity;
+    }
+
+    public boolean updateQuantity(int equipmentId,
+            int newQuantity) {
+
+        boolean rowUpdated = false;
+
+        try {
+
+            Connection conn = DBConnection.getConnection();
+
+            String sql
+                    = "UPDATE EQUIPMENTS SET QUANTITY=? WHERE EQUIPMENT_ID=?";
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setInt(1, newQuantity);
+
+            ps.setInt(2, equipmentId);
+
+            rowUpdated = ps.executeUpdate() > 0;
+
+            conn.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return rowUpdated;
+    }
 }

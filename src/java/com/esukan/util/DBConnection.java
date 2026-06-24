@@ -12,7 +12,7 @@ import java.sql.DriverManager;
  * @author 20248
  */
 public class DBConnection {
-        private static final String URL = "jdbc:derby://localhost:1527/ESukanDB";
+    private static final String URL = "jdbc:derby://localhost:1527/ESukanDB";
     private static final String USER = "adminEsukan";
     private static final String PASSWORD = "admin123";
 

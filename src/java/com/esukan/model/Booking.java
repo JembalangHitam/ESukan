@@ -16,6 +16,14 @@ public class Booking {
     private int facilityId;
     private String bookingDate;
     private String timeSlot;
+    private String bookingStatus;
+
+    public String getBookingStatus() {
+        return bookingStatus;
+    }
+    public void setBookingStatus(String bookingStatus) {
+        this.bookingStatus = bookingStatus;
+    }
 
     public Booking() {
     }

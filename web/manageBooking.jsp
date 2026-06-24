@@ -23,12 +23,6 @@
         <h1>Manage Booking</h1>
 
         <form action="BookingServlet" method="post">
-
-            User ID:
-            <br>
-            <input type="number" name="userId" required>
-            <br><br>
-
             Facility ID:
             <br>
             <input type="number" name="facilityId" required>
@@ -62,6 +56,9 @@
                 <th>Facility ID</th>
                 <th>Booking Date</th>
                 <th>Time Slot</th>
+                <th>Status</th>
+                <th>Edit</th>
+                <th>Delete</th>
             </tr>
 
             <%
@@ -74,8 +71,19 @@
                 <td><%=booking.getFacilityId()%></td>
                 <td><%=booking.getBookingDate()%></td>
                 <td><%=booking.getTimeSlot()%></td>
-            </tr>
+                <td><%=booking.getBookingStatus()%></td>
+                <td>
+                    <a href="editBooking.jsp?id=<%=booking.getBookingId()%>">
+                        Edit
+                    </a>
+                </td>
 
+                <td>
+                    <a href="BookingServlet?deleteId=<%=booking.getBookingId()%>">
+                        Delete
+                    </a>
+                </td>
+            </tr>
             <%
                 }
             %>

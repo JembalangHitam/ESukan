@@ -3,43 +3,74 @@
     Created on : Jun 19, 2026, 3:48:41 AM
     Author     : 20248
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Register</title>
-</head>
-<body>
 
-<h1>User Registration</h1>
+    <head>
 
-<form action="RegisterServlet" method="post">
+        <title>E-Sukan Registration</title>
 
-    Full Name:<br>
-    <input type="text" name="fullname">
-    <br><br>
+        <link rel="stylesheet" href="style.css">
 
-    Email:<br>
-    <input type="email" name="email">
-    <br><br>
+    </head>
 
-    Password:<br>
-    <input type="password" name="password">
-    <br><br>
+    <body>
 
-    Role:<br>
-    <select name="role">
-        <option value="Student">Student</option>
-        <option value="Admin">Admin</option>
-    </select>
+        <div class="container">
 
-    <br><br>
+            <h1>E-Sukan Registration</h1>
 
-    <input type="submit" value="Register">
+            <form action="RegisterServlet" method="post">
 
-</form>
+                Full Name
 
-</body>
+                <input type="text"
+                       name="fullname"
+                       required>
+
+                Email
+
+                <input type="email"
+                       name="email"
+                       required>
+
+                Password
+
+                <input type="password"
+                       name="password"
+                       required>
+
+                Role
+
+                <select name="role">
+
+                    <option value="Student">
+                        Student
+                    </option>
+
+                    <option value="Admin">
+                        Admin
+                    </option>
+
+                </select>
+
+                <input type="submit"
+                       value="Register">
+
+            </form>
+
+            <div class="register">
+
+                <a href="login.jsp">
+                    Already have an account? Login
+                </a>
+
+            </div>
+
+        </div>
+
+    </body>
+
 </html>
